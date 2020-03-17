@@ -1,0 +1,32 @@
+{
+  "name": "generic-node",
+  "version": "1.0.0",
+  "description": "first commit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist",
+    "clean": "rm -rf dist",
+    "develop": "nodemon --exec babel-node src/index.js",
+    "start": "npm run clean && npm run build && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.8.4",
+    "body-parser": "^1.19.0",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4",
+    "pg": "^7.18.1"
+  },
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "^1.0.2"
+  }
+}
