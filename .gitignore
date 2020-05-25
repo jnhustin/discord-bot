@@ -4,3 +4,4 @@
 .DS_STORE
 config.js
 update_config.sh
+samples/
