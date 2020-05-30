@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 
+const reportChannel = 'report-logs';
+
 module.exports = {
   name        :  'report',
   category    :  'moderation',
@@ -18,7 +20,7 @@ module.exports = {
       return message.reply("Can't report that member").then(msg => msg.delete(5000));
     }
 
-    const channel      =  message.guild.channels.cache.find( (channel) => channel.name === 'bot-test');
+    const channel      =  message.guild.channels.cache.find( (channel) => channel.name === reportChannel);
     const reportReason =  args.slice(1).join(' ');
 
     if (!channel) {
@@ -31,10 +33,10 @@ module.exports = {
       .setFooter(message.guild.name, message.guild.iconURL)
       .setAuthor('Reported member', theAccused.displayAvatarURL())
       .setDescription(`
-        > Member: ${theAccused}
-        > Reported by: ${message.member} ${message.member.id}
-        > Reported in: ${message.channel}
-        > Reason: ${reportReason}`);
+        > Member      :  ${theAccused}
+        > Reported by :  ${message.member} ${message.member.id}
+        > Reported in :  ${message.channel}
+        > Reason      :  ${reportReason}`);
 
     return channel.send(embed)
   }
