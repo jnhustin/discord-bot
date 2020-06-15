@@ -8,7 +8,13 @@ module.exports = (client) => {
     const commands = readdirSync(path.join(__dirname, '..', `commands/${dir}/`)).filter( file => file.endsWith('.js'));
 
     for (let file of commands) {
+      // skip test files
+      if (file.includes('.test.')) { continue }
+
+      // confirm and log commands are loading
       let command = require(path.join(__dirname, '..',`commands/${dir}/${file}`));
+      if (command.default) { command = command.default; }
+
       if (command.name) {
         client.commands.set(command.name, command);
         table.addRow(file, '✅  Loaded');
