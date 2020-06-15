@@ -37,7 +37,7 @@ module.exports = {
   }
 }
 
-const buildDescription = (trailers, choices) => {
+export const buildDescription = (trailers, choices) => {
   let description = '';
   description += `trailers: ${trailers}\n`
 
@@ -49,7 +49,7 @@ const buildDescription = (trailers, choices) => {
 }
 
 
-const getMovieChoices = (args) => args
+export const getMovieChoices = (args) => args
   .join(' ')
   .split(',')
   .map(choice => choice.split('='))
