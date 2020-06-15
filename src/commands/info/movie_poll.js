@@ -7,7 +7,7 @@ const USAGE = "`senpai poll <TRAILER_LINK> <EMOJI>=<NAME_OF_OPTION>, <EMOJI>=<NA
     \n\nexample: senpai `https://www.youtube.com/watch?v=dQw4w9WgXcQ` :soccer: =she's the man,  \
     :alien:= Independence day, :star:=star wars: a new hope";
 
-module.exports = {
+export default {
   name        :  'movie-poll',
   aliases     :  ['movie-vote', 'vote-movie', 'moviepoll','movie', 'mp'],
   category    :  'info',
@@ -23,7 +23,8 @@ module.exports = {
     if (message.deletable) { message.delete(); }
 
     const trailersLink =  args.shift();
-    const movieChoices =  getMovieChoices(args);
+    const stringedArguments = stringifyArguments(args)
+    const movieChoices =  getMovieChoices(stringedArguments);
     const description  =  buildDescription(trailersLink, movieChoices);
     const embed = new MessageEmbed()
       .setTitle('Movie Voting')
@@ -37,6 +38,8 @@ module.exports = {
   }
 }
 
+export const stringifyArguments = (args) => args.join(' ');
+
 export const buildDescription = (trailers, choices) => {
   let description = '';
   description += `trailers: ${trailers}\n`
@@ -49,8 +52,23 @@ export const buildDescription = (trailers, choices) => {
 }
 
 
+// export const getMovieChoices = (args) => {
+//   console.log(args);
+
+//   const foo =  args
+//   .join(' ')
+//   .split(',')
+//   .map(choice => choice.split('='))
+//   .map(choice => {
+//     console.log('choice: ', choice.map(str => str.trim()))
+//     return choice.map(str => str.trim())
+//   })
+//   .concat([['⚔', 'Something else']]);
+//   console.log('foo: ', foo)
+//   return foo;
+// }
+
 export const getMovieChoices = (args) => args
-  .join(' ')
   .split(',')
   .map(choice => choice.split('='))
   .map(choice => choice.map(str => str.trim()))
